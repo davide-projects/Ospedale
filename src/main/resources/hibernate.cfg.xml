@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+    <session-factory>
+
+        <!-- Connessione MySQL -->
+        <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/ospedale</property>
+        <property name="hibernate.connection.username">root</property>
+        <property name="hibernate.connection.password">1234</property>
+
+        <!-- Dialetto Hibernate 6 per MySQL -->
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+
+        <!-- Mostra le query in console (utile per debug) -->
+        <property name="hibernate.show_sql">true</property>
+        <property name="hibernate.format_sql">true</property>
+
+        <!-- update = non distrugge i dati già inseriti -->
+        <property name="hibernate.hbm2ddl.auto">update</property>
+
+        <!-- Mapping delle entità -->
+        <mapping class="it.ospedale.model.Medico"/>
+        <mapping class="it.ospedale.model.Paziente"/>
+        <mapping class="it.ospedale.model.Visita"/>
+
+    </session-factory>
+</hibernate-configuration>
