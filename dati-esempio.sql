@@ -1,39 +1,45 @@
-CREATE DATABASE IF NOT EXISTS ospedale
-
 USE ospedale;
 
+SET FOREIGN_KEY_CHECKS = 0;
 CREATE TABLE pazienti (
-  id    INT          AUTO_INCREMENT PRIMARY KEY,
-  nome  VARCHAR(100) NOT NULL,
-  email VARCHAR(150) NOT NULL UNIQUE
+                          id    INT          AUTO_INCREMENT PRIMARY KEY,
+                          nome  VARCHAR(100) NOT NULL,
+                          email VARCHAR(150) NOT NULL UNIQUE
 );
 
 CREATE TABLE medici (
-    id                 INT          AUTO_INCREMENT PRIMARY KEY,
-    nome               VARCHAR(100) NOT NULL,
-    specializzazione   VARCHAR(100) NOT NULL
+                        id                 INT          AUTO_INCREMENT PRIMARY KEY,
+                        nome               VARCHAR(100) NOT NULL,
+                        specializzazione   VARCHAR(100) NOT NULL
 );
 
 CREATE TABLE visite (
-    id           INT  AUTO_INCREMENT PRIMARY KEY,
-    paziente_id  INT  NOT NULL,
-    medico_id    INT  NOT NULL,
-    data_visita  DATE NOT NULL,
-    descrizione  TEXT NOT NULL,
-    FOREIGN KEY (paziente_id) REFERENCES pazienti(id),
-    FOREIGN KEY (medico_id)   REFERENCES medici(id)
+                        id           INT  AUTO_INCREMENT PRIMARY KEY,
+                        paziente_id  INT  NOT NULL,
+                        medico_id    INT  NOT NULL,
+                        data_visita  DATE NOT NULL,
+                        descrizione  TEXT NOT NULL,
+                        FOREIGN KEY (paziente_id) REFERENCES pazienti(id),
+                        FOREIGN KEY (medico_id)   REFERENCES medici(id)
 );
 
 INSERT INTO medici (nome, specializzazione) VALUES
-    ('Marco Ferretti',   'cardiologia'),
-    ('Laura Ricci',      'cardiologia'),
-    ('Giovanni Esposito','ortopedia'),
-    ('Sara Mancini',     'ortopedia'),
-    ('Paolo Conti',      'neurologia'),
-    ('Anna Greco',       'pediatria');
+                                                ('Marco Ferretti',   'cardiologia'),
+                                                ('Laura Ricci',      'cardiologia'),
+                                                ('Giovanni Esposito','ortopedia'),
+                                                ('Sara Mancini',     'ortopedia'),
+                                                ('Paolo Conti',      'neurologia'),
+                                                ('Anna Greco',       'pediatria');
 
 INSERT INTO pazienti (nome, email) VALUES
-    ('Mario Rossi',    'mario.rossi@email.it'),
-    ('Laura Bianchi',  'laura.bianchi@gmail.com'),
-    ('Giovanni Verdi', 'g.verdi@outlook.com'),
-    ('Sara Neri',      'sara.neri@libero.it');
+                                       ('Mario Rossi',    'mario.rossi@email.it'),
+                                       ('Laura Bianchi',  'laura.bianchi@gmail.com'),
+                                       ('Giovanni Verdi', 'g.verdi@outlook.com'),
+                                       ('Sara Neri',      'sara.neri@libero.it');
+
+
+INSERT INTO visite (paziente_id, medico_id, data_visita, descrizione) VALUES (1, 1, '2026-06-01', 'Controllo generale di routine');
+INSERT INTO visite (paziente_id, medico_id, data_visita, descrizione) VALUES (2, 1, '2026-06-02', 'Sintomi influenzali');
+INSERT INTO visite (paziente_id, medico_id, data_visita, descrizione) VALUES (1, 2, '2026-06-03', 'Visita specialistica');
+
+SET FOREIGN_KEY_CHECKS = 1;

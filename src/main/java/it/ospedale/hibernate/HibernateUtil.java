@@ -18,7 +18,7 @@ public class HibernateUtil {
             config.setProperty("hibernate.connection.url",
                     "jdbc:mysql://localhost:3306/ospedale?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC");
             config.setProperty("hibernate.connection.username", "root");
-            config.setProperty("hibernate.connection.password", "1234");
+            config.setProperty("hibernate.connection.password", "root");
 
             config.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQLDialect");
             config.setProperty("hibernate.hbm2ddl.auto", "update");
