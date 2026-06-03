@@ -40,6 +40,20 @@ public class VisiteServlet extends HttpServlet {
     }
 
     @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+
+        String action = req.getParameter("action");
+
+        if ("elimina".equals(action)) {
+            int id = Integer.parseInt(req.getParameter("id"));
+            new VisitaDAO().delete(id);
+        }
+
+        resp.sendRedirect(req.getContextPath() + "/visite");
+    }
+
+    @Override
     public void destroy() {
         logger.info("[VisiteServlet] Distrutta.");
     }

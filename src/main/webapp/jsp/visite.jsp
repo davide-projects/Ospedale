@@ -65,7 +65,6 @@
         .card-header h2 { color: #1a3c5c; font-size: 18px; }
         .card-header span { font-size: 13px; color: #666; }
 
-        /* ORDINAMENTO */
         .ordina-bar {
             display: flex;
             flex-wrap: wrap;
@@ -135,6 +134,22 @@
             padding: 40px;
             font-style: italic;
         }
+
+        /* BOTTONE ELIMINA */
+        .btn-elimina {
+            background: none;
+            border: 1px solid #e53935;
+            color: #e53935;
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: background 0.2s, color 0.2s;
+        }
+        .btn-elimina:hover {
+            background: #e53935;
+            color: white;
+        }
     </style>
 </head>
 <body>
@@ -185,6 +200,7 @@
                     <th>Paziente</th>
                     <th>Medico</th>
                     <th>Descrizione</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -195,10 +211,18 @@
                         <td><span class="badge-paziente">👤 ${v.paziente.nome}</span></td>
                         <td><span class="badge-medico">👨‍⚕️ ${v.medico.nome}</span></td>
                         <td>${v.descrizione}</td>
+                        <td>
+                            <form method="post" action="${pageContext.request.contextPath}/visite"
+                                  onsubmit="return confirm('Eliminare la visita del ${v.dataVisita} per ${v.paziente.nome}?')">
+                                <input type="hidden" name="action" value="elimina"/>
+                                <input type="hidden" name="id" value="${v.id}"/>
+                                <button type="submit" class="btn-elimina">🗑️ Elimina</button>
+                            </form>
+                        </td>
                     </tr>
                 </c:forEach>
                 <c:if test="${empty visite}">
-                    <tr><td colspan="5" class="empty">Nessuna visita registrata.</td></tr>
+                    <tr><td colspan="6" class="empty">Nessuna visita registrata.</td></tr>
                 </c:if>
             </tbody>
         </table>

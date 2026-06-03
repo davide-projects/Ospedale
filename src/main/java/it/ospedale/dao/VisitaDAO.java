@@ -26,26 +26,30 @@ public class VisitaDAO {
     }
 
     public List<Visita> trovaTutti(String ordinamento) {
-        String hql;
-        switch (ordinamento != null ? ordinamento : "") {
-            case "paziente":
-                hql = "FROM Visita v JOIN FETCH v.medico JOIN FETCH v.paziente ORDER BY v.paziente.nome ASC";
-                break;
-            case "medico":
-                hql = "FROM Visita v JOIN FETCH v.medico JOIN FETCH v.paziente ORDER BY v.medico.nome ASC";
-                break;
-            case "data_asc":
-                hql = "FROM Visita v JOIN FETCH v.medico JOIN FETCH v.paziente ORDER BY v.dataVisita ASC";
-                break;
-            case "data_desc":
-                hql = "FROM Visita v JOIN FETCH v.medico JOIN FETCH v.paziente ORDER BY v.dataVisita DESC";
-                break;
-            default:
-                hql = "FROM Visita v JOIN FETCH v.medico JOIN FETCH v.paziente ORDER BY v.dataVisita DESC";
-                break;
-        }
+        String hql = switch (ordinamento != null ? ordinamento : "") {
+            case "paziente" -> "FROM Visita v JOIN FETCH v.medico JOIN FETCH v.paziente ORDER BY v.paziente.nome ASC";
+            case "medico" -> "FROM Visita v JOIN FETCH v.medico JOIN FETCH v.paziente ORDER BY v.medico.nome ASC";
+            case "data_asc" -> "FROM Visita v JOIN FETCH v.medico JOIN FETCH v.paziente ORDER BY v.dataVisita ASC";
+            case "data_desc" -> "FROM Visita v JOIN FETCH v.medico JOIN FETCH v.paziente ORDER BY v.dataVisita DESC";
+            default -> "FROM Visita v JOIN FETCH v.medico JOIN FETCH v.paziente ORDER BY v.dataVisita DESC";
+        };
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             return session.createQuery(hql, Visita.class).list();
+        }
+    }
+
+    public void delete(int id) {
+        Transaction tx = null;
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            tx = session.beginTransaction();
+            Visita v = session.get(Visita.class, id);
+            if (v != null) {
+                session.remove(v);
+            }
+            tx.commit();
+        } catch (Exception e) {
+            if (tx != null) tx.rollback();
+            throw e;
         }
     }
 }
