@@ -12,6 +12,11 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
+
+import it.ospedale.service.OspedaleExecutorService;
+import it.ospedale.service.ProcessaVisitaTask;
+
+
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
@@ -84,6 +89,10 @@ public class VisitaServlet extends HttpServlet {
 
             Visita visita = new Visita(paziente, medico, LocalDate.now(), descrizione);
             visitaDAO.inserisci(visita);
+
+            OspedaleExecutorService executor = OspedaleExecutorService.getInstance();
+            executor.getPool().submit(new ProcessaVisitaTask(visita.getId()));
+
 
         } catch (NumberFormatException e) {
             logger.log(Level.SEVERE, "Formato non valido", e);

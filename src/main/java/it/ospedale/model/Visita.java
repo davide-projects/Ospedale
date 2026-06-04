@@ -25,6 +25,16 @@ public class Visita {
     @Column(name = "descrizione")
     private String descrizione;
 
+    @Column(name = "esito")
+    private String esito;
+
+    @Column(name = "durata_ms")
+    private Long durataMs;
+
+    @Column(name = "medico_thread")
+    private String medicoThread;
+
+
     @Transient
     private String dataFormattata;
 
@@ -53,6 +63,16 @@ public class Visita {
 
     public String getDescrizione() { return descrizione; }
     public void setDescrizione(String descrizione) { this.descrizione = descrizione; }
+
+    public String getEsito() { return esito; }
+    public void setEsito(String esito) { this.esito = esito; }
+
+    public Long getDurataMs() { return durataMs; }
+    public void setDurataMs(Long durataMs) { this.durataMs = durataMs; }
+
+    public String getMedicoThread() { return medicoThread; }
+    public void setMedicoThread(String medicoThread) { this.medicoThread = medicoThread; }
+
 
     public String getDataFormattata() { return dataFormattata; }
     public void setDataFormattata(String dataFormattata) { this.dataFormattata = dataFormattata; }

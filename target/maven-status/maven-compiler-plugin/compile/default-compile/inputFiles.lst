@@ -5,6 +5,8 @@ C:\Users\User\IdeaProjects\Ospedale\src\main\java\it\ospedale\hibernate\Hibernat
 C:\Users\User\IdeaProjects\Ospedale\src\main\java\it\ospedale\model\Medico.java
 C:\Users\User\IdeaProjects\Ospedale\src\main\java\it\ospedale\model\Paziente.java
 C:\Users\User\IdeaProjects\Ospedale\src\main\java\it\ospedale\model\Visita.java
+C:\Users\User\IdeaProjects\Ospedale\src\main\java\it\ospedale\service\OspedaleExecutorService.java
+C:\Users\User\IdeaProjects\Ospedale\src\main\java\it\ospedale\service\ProcessaVisitaTask.java
 C:\Users\User\IdeaProjects\Ospedale\src\main\java\it\ospedale\servlet\MediciServlet.java
 C:\Users\User\IdeaProjects\Ospedale\src\main\java\it\ospedale\servlet\VisitaServlet.java
 C:\Users\User\IdeaProjects\Ospedale\src\main\java\it\ospedale\servlet\VisiteServlet.java
