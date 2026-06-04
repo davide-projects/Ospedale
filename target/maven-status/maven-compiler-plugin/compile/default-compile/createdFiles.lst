@@ -3,6 +3,7 @@ it\ospedale\model\Visita.class
 it\ospedale\model\Medico.class
 it\ospedale\dao\PazienteDAO.class
 it\ospedale\servlet\VisiteServlet.class
+it\ospedale\util\DateFormatterService.class
 it\ospedale\model\Paziente.class
 it\ospedale\servlet\MediciServlet.class
 it\ospedale\dao\MedicoDAO.class

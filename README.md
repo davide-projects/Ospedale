@@ -11,7 +11,6 @@ Web application Java per la gestione dei medici e delle visite dei pazienti di u
 - **JSTL 3** — Template engine per le JSP
 - **Jetty 11** — Server embedded
 - **Maven** — Gestione dipendenze e build
-
 ---
 
 ## Struttura del Progetto
@@ -45,7 +44,7 @@ src/
         └── index.jsp
 pom.xml
 ```
-
+ 
 ---
 
 ## Modello ER
@@ -56,7 +55,7 @@ PAZIENTI               MEDICI
 id (PK)                id (PK)
 nome                   nome
 email (unique)         specializzazione
-
+ 
 VISITE
 ------
 id (PK)
@@ -65,7 +64,7 @@ medico_id     (FK → medici.id)
 data_visita
 descrizione
 ```
-
+ 
 ---
 
 ## Funzionalità
@@ -73,36 +72,36 @@ descrizione
 - **Lista Medici** — visualizzazione di tutti i medici con filtro per specializzazione
 - **Nuova Visita** — form per registrare una visita con selezione medico e paziente
 - **Lista Visite** — visualizzazione di tutte le visite con ordinamento per data, paziente o medico
+- **Cancellazione Visita** — eliminazione di una visita con modal di conferma per prevenire cancellazioni accidentali (pattern confirm-before-delete)
 - **Validazione email** — controllo formato email sui pazienti
 - **Pattern PRG** — Post-Redirect-Get per evitare il doppio submit
-
 ---
 
 ## Installazione e Avvio
 
 ### Prerequisiti
+
 - Java 17+
 - Maven
 - MySQL
-
 ### 1. Crea il database
 
 ```sql
 CREATE DATABASE IF NOT EXISTS ospedale;
 USE ospedale;
-
+ 
 CREATE TABLE pazienti (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
     email VARCHAR(150) NOT NULL UNIQUE
 );
-
+ 
 CREATE TABLE medici (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
     specializzazione VARCHAR(100) NOT NULL
 );
-
+ 
 CREATE TABLE visite (
     id INT AUTO_INCREMENT PRIMARY KEY,
     paziente_id INT NOT NULL,
@@ -127,7 +126,7 @@ config.setProperty("hibernate.connection.password", "TUA_PASSWORD");
 ```bash
 mvn jetty:run
 ```
-
+ 
 ---
 
 ## URL
@@ -137,9 +136,5 @@ mvn jetty:run
 | Lista Medici | http://localhost:8080/ospedale/medici |
 | Nuova Visita | http://localhost:8080/ospedale/visita |
 | Lista Visite | http://localhost:8080/ospedale/visite |
-
+ 
 ---
-
-## Autore
-
-Progetto realizzato come prova finale del corso ITS.

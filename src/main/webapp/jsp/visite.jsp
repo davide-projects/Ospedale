@@ -4,7 +4,16 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
+    <meta name="description" content="Gestione delle visite mediche: elenco completo, pazienti, medici, date e descrizioni delle visite registrate. Sistema semplice, veloce e intuitivo.">
     <title>Ospedale — Visite</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- JS personalizzato -->
+    <script src="${pageContext.request.contextPath}/js/modal.js"></script>
+
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -135,7 +144,6 @@
             font-style: italic;
         }
 
-        /* BOTTONE ELIMINA */
         .btn-elimina {
             background: none;
             border: 1px solid #e53935;
@@ -155,20 +163,21 @@
 <body>
 
 <header>
-    <h1>🏥 Sistema Gestione Ospedale</h1>
+    <h1>🏥 <strong> Sistema Gestione Ospedale </strong></h1>
 </header>
-
 <nav>
     <a href="${pageContext.request.contextPath}/medici">👨‍⚕️ Medici</a>
     <a href="${pageContext.request.contextPath}/visite">📋 Visite</a>
     <a href="${pageContext.request.contextPath}/visita">➕ Nuova Visita</a>
 </nav>
 
+<main>
+
 <div class="container">
     <div class="card">
 
         <div class="card-header">
-            <h2>📋 Lista Visite</h2>
+            <h2>📋<strong> Lista Visite </strong></h2>
             <span>${totale} visite registrate</span>
         </div>
 
@@ -194,36 +203,62 @@
 
         <table>
             <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Data</th>
-                    <th>Paziente</th>
-                    <th>Medico</th>
-                    <th>Descrizione</th>
-                    <th></th>
-                </tr>
+            <tr>
+                <th>ID</th>
+                <th>Data</th>
+                <th>Paziente</th>
+                <th>Medico</th>
+                <th>Descrizione</th>
+                <th></th>
+            </tr>
             </thead>
             <tbody>
-                <c:forEach var="v" items="${visite}">
-                    <tr>
-                        <td>${v.id}</td>
-                        <td>${v.dataVisita}</td>
-                        <td><span class="badge-paziente">👤 ${v.paziente.nome}</span></td>
-                        <td><span class="badge-medico">👨‍⚕️ ${v.medico.nome}</span></td>
-                        <td>${v.descrizione}</td>
-                        <td>
-                            <form method="post" action="${pageContext.request.contextPath}/visite"
-                                  onsubmit="return confirm('Eliminare la visita del ${v.dataVisita} per ${v.paziente.nome}?')">
-                                <input type="hidden" name="action" value="elimina"/>
-                                <input type="hidden" name="id" value="${v.id}"/>
-                                <button type="submit" class="btn-elimina">🗑️ Elimina</button>
-                            </form>
-                        </td>
-                    </tr>
-                </c:forEach>
-                <c:if test="${empty visite}">
-                    <tr><td colspan="6" class="empty">Nessuna visita registrata.</td></tr>
-                </c:if>
+            <c:forEach var="v" items="${visite}">
+                <tr>
+                    <td>${v.id}</td>
+                    <td>${v.dataFormattata}</td>
+                    <td><span class="badge-paziente">👤 ${v.paziente.nome}</span></td>
+                    <td><span class="badge-medico">👨‍⚕️ ${v.medico.nome}</span></td>
+                    <td>${v.descrizione}</td>
+                    <td>
+                        <form method="post"
+                              action="${pageContext.request.contextPath}/visite"
+                              onsubmit="event.preventDefault(); apriModalElimina('${v.dataFormattata}', '${v.paziente.nome}', this);">
+                            <input type="hidden" name="action" value="elimina"/>
+                            <input type="hidden" name="id" value="${v.id}"/>
+                            <button type="submit" class="btn-elimina">🗑️ Elimina</button>
+                        </form>
+                    </td>
+                </tr>
+            </c:forEach>
+
+            <c:if test="${empty visite}">
+                <tr><td colspan="6" class="empty">Nessuna visita registrata.</td></tr>
+            </c:if>
+
+            <div class="modal fade" id="modalConfermaElimina" tabindex="-1">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+
+                        <div class="modal-header bg-danger text-white">
+                            <h5 class="modal-title">Conferma Eliminazione</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+
+                        <div class="modal-body">
+                            <p>Vuoi davvero eliminare la visita del <strong id="modalData"></strong> per il paziente <strong id="modalPaziente"></strong>?</p>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button class="btn btn-secondary" data-bs-dismiss="modal">Annulla</button>
+                            <button class="btn btn-danger" onclick="confermaEliminazione()">Elimina</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            </main>
             </tbody>
         </table>
 

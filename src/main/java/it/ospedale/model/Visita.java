@@ -25,14 +25,17 @@ public class Visita {
     @Column(name = "descrizione")
     private String descrizione;
 
+    @Transient
+    private String dataFormattata;
+
     // Costruttori
     public Visita() {}
 
     public Visita(Paziente paziente, Medico medico, LocalDate dataVisita, String descrizione) {
-        this.setPaziente(paziente);
-        this.setMedico(medico);
-        this.setDataVisita(dataVisita);
-        this.setDescrizione(descrizione);
+        this.paziente = paziente;
+        this.medico = medico;
+        this.dataVisita = dataVisita;
+        this.descrizione = descrizione;
     }
 
     // Getter e Setter
@@ -51,9 +54,16 @@ public class Visita {
     public String getDescrizione() { return descrizione; }
     public void setDescrizione(String descrizione) { this.descrizione = descrizione; }
 
+    public String getDataFormattata() { return dataFormattata; }
+    public void setDataFormattata(String dataFormattata) { this.dataFormattata = dataFormattata; }
+
     @Override
     public String toString() {
-        return "Visita{id=" + id + ", paziente=" + paziente.getNome() +
-                ", medico=" + medico.getNome() + ", data=" + dataVisita + "}";
+        return "Visita{" +
+                "id=" + id +
+                ", paziente=" + (paziente != null ? paziente.getNome() : "N/D") +
+                ", medico=" + (medico != null ? medico.getNome() : "N/D") +
+                ", dataVisita=" + dataVisita +
+                '}';
     }
 }

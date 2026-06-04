@@ -4,6 +4,7 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
+    <meta name="description" content="Inserimento Visita Medica ">
     <title>Ospedale — Nuova Visita</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -90,7 +91,7 @@
         textarea { height: 90px; resize: vertical; }
 
         .info {
-            color: #888;
+            color: #525252;
             font-size: 12px;
             margin-top: 6px;
         }
@@ -133,6 +134,7 @@
     <a href="${pageContext.request.contextPath}/visita">➕ Nuova Visita</a>
 </nav>
 
+<main>
 <div class="container">
     <div class="card">
         <h2>📋 Registra Nuova Visita</h2>
@@ -176,6 +178,6 @@
         </form>
     </div>
 </div>
-
+<main>
 </body>
 </html>

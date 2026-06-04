@@ -4,6 +4,7 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
+        <meta name="description" content="Elenco dei medici dell'Ospedale: nomi, specializzazioni e gestione anagrafica. Consultazione rapida e sistema intuitivo per organizzare il personale medico.">
     <title>Ospedale — Medici</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -148,7 +149,7 @@
     <a href="${pageContext.request.contextPath}/visita">➕ Nuova Visita</a>
 
 </nav>
-
+<main>
 <div class="container">
 
     <c:if test="${param.messaggio == 'visita_creata'}">
@@ -194,6 +195,6 @@
 
     </div>
 </div>
-
+</main>
 </body>
 </html>

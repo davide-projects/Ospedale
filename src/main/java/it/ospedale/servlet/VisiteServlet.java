@@ -2,6 +2,7 @@ package it.ospedale.servlet;
 
 import it.ospedale.dao.VisitaDAO;
 import it.ospedale.model.Visita;
+import it.ospedale.util.DateFormatterService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -32,6 +33,11 @@ public class VisiteServlet extends HttpServlet {
 
         List<Visita> visite = visitaDAO.trovaTutti(ordinamento);
 
+        // 🔥 FORMATTAZIONE DATA ITALIANA
+        for (Visita v : visite) {
+            v.setDataFormattata(DateFormatterService.formatShort(v.getDataVisita()));
+        }
+
         req.setAttribute("visite", visite);
         req.setAttribute("totale", visite.size());
         req.setAttribute("ordinamento", ordinamento);
@@ -47,7 +53,7 @@ public class VisiteServlet extends HttpServlet {
 
         if ("elimina".equals(action)) {
             int id = Integer.parseInt(req.getParameter("id"));
-            new VisitaDAO().delete(id);
+            visitaDAO.delete(id);
         }
 
         resp.sendRedirect(req.getContextPath() + "/visite");
