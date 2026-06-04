@@ -1,3 +1,5 @@
+C:\Users\User\IdeaProjects\Ospedale\src\main\java\it\ospedale\api\LocalDateAdapter.java
+C:\Users\User\IdeaProjects\Ospedale\src\main\java\it\ospedale\api\VisiteApiServlet.java
 C:\Users\User\IdeaProjects\Ospedale\src\main\java\it\ospedale\dao\MedicoDAO.java
 C:\Users\User\IdeaProjects\Ospedale\src\main\java\it\ospedale\dao\PazienteDAO.java
 C:\Users\User\IdeaProjects\Ospedale\src\main\java\it\ospedale\dao\VisitaDAO.java
@@ -8,6 +10,7 @@ C:\Users\User\IdeaProjects\Ospedale\src\main\java\it\ospedale\model\Visita.java
 C:\Users\User\IdeaProjects\Ospedale\src\main\java\it\ospedale\service\OspedaleExecutorService.java
 C:\Users\User\IdeaProjects\Ospedale\src\main\java\it\ospedale\service\ProcessaVisitaTask.java
 C:\Users\User\IdeaProjects\Ospedale\src\main\java\it\ospedale\servlet\MediciServlet.java
+C:\Users\User\IdeaProjects\Ospedale\src\main\java\it\ospedale\servlet\StatoVisiteServlet.java
 C:\Users\User\IdeaProjects\Ospedale\src\main\java\it\ospedale\servlet\VisitaServlet.java
 C:\Users\User\IdeaProjects\Ospedale\src\main\java\it\ospedale\servlet\VisiteServlet.java
 C:\Users\User\IdeaProjects\Ospedale\src\main\java\it\ospedale\util\DateFormatterService.java

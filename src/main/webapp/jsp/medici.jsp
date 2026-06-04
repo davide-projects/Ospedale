@@ -146,6 +146,7 @@
 <nav>
     <a href="${pageContext.request.contextPath}/medici">👨‍⚕️ Medici</a>
     <a href="${pageContext.request.contextPath}/visite">📋 Visite</a>
+    <a href="${pageContext.request.contextPath}/stato-visite">📊 Stato Visite</a>
     <a href="${pageContext.request.contextPath}/visita">➕ Nuova Visita</a>
 
 </nav>
